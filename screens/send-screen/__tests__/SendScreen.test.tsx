@@ -1,13 +1,12 @@
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
-import React from 'react';
 import { Alert } from 'react-native';
 import SendScreen from '../send-screen';
+
+import { useExchangeRates } from '../use-exchange-rates';
 
 jest.mock('../use-exchange-rates', () => ({
   useExchangeRates: jest.fn(),
 }));
-
-import { useExchangeRates } from '../use-exchange-rates';
 
 describe('SendScreen (TypeScript)', () => {
   beforeEach(() => {
@@ -118,7 +117,10 @@ describe('SendScreen (TypeScript)', () => {
     await waitFor(() => {
       expect(Alert.alert).toHaveBeenCalledWith(
         'Success',
-        'Your transaction is being sent.'
+        `Transaction Details:
+          Recipient: John Doe
+          Phone: +254 712345678
+          Amount: 1500.00 KES`
       );
     });
 

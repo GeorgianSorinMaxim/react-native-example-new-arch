@@ -7,8 +7,7 @@ import {
   Pressable,
   ScrollView,
   TextInput,
-  useColorScheme,
-  View,
+  View
 } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -28,8 +27,6 @@ export type CountryKey = keyof typeof countries;
 export type CurrencyKey = 'KES' | 'NGN' | 'TZS' | 'UGX' | 'USD';
 
 export default function SendScreen() {
-  const scheme = useColorScheme();
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [country, setCountry] = useState<CountryKey>('KENYA');
@@ -49,10 +46,10 @@ export default function SendScreen() {
   const placeholderTextColor = useThemeColor({}, 'placeholder');
   const borderColor = useThemeColor({}, 'border');
 
-const { rates, loadingRates } = useExchangeRates() as {
-  rates: Record<CurrencyKey, number> | null;
-  loadingRates: boolean;
-};
+  const { rates, loadingRates } = useExchangeRates() as {
+    rates: Record<CurrencyKey, number> | null;
+    loadingRates: boolean;
+  };
 
   const onSend = () => {
     if (!firstName.trim() || !lastName.trim()) {
@@ -73,14 +70,19 @@ const { rates, loadingRates } = useExchangeRates() as {
     setSending(true);
     setTimeout(() => {
       setSending(false);
-      Alert.alert('Success', 'Your transaction is being sent.');
+        Alert.alert(
+          'Success',
+          `Transaction Details:
+          Recipient: ${firstName} ${lastName}
+          Phone: ${countries[country].prefix} ${phone}
+          Amount: ${recipientAmount}`
+      );
     }, 1000);
   };
 
-  const recipientCurrency = countries[country].currency;
+  const recipientCurrency = countries[country].currency as CurrencyKey;
   const recipientAmount = (() => {
     if (!usdAmount || !rates) return null;
-    const recipientCurrency = countries[country].currency as CurrencyKey;
     const rate = rates ? rates[recipientCurrency] : undefined;
     if (!rate) return null;
     const converted = parseFloat(usdAmount) * rate;
