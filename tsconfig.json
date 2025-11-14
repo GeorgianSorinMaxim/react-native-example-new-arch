@@ -1,0 +1,32 @@
+{
+  "target": "ESNext",
+  "module": "ESNext",
+  "jsx": "react",
+  "moduleResolution": "node",
+  "allowJs": true,
+  "esModuleInterop": true,
+  "skipLibCheck": true,
+  "strict": true,
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts", 
+    "jest.setup.js"  
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/**",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}
