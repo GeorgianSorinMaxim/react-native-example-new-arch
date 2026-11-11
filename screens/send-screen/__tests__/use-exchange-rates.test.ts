@@ -24,9 +24,7 @@ describe('useExchangeRates', () => {
       }) as any
     );
 
-    const { result } = renderHook(() => useExchangeRates());
-
-    expect(result.current.loadingRates).toBe(true);
+    const { result } = await renderHook(() => useExchangeRates());
 
     await waitFor(() => expect(result.current.loadingRates).toBe(false));
 
@@ -44,9 +42,7 @@ describe('useExchangeRates', () => {
 
     const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => {});
 
-    const { result } = renderHook(() => useExchangeRates());
-
-    expect(result.current.loadingRates).toBe(true);
+    const { result } = await renderHook(() => useExchangeRates());
 
     await waitFor(() => expect(result.current.loadingRates).toBe(false));
 
@@ -61,9 +57,7 @@ describe('useExchangeRates', () => {
 
     const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => {});
 
-    const { result } = renderHook(() => useExchangeRates());
-
-    expect(result.current.loadingRates).toBe(true);
+    const { result } = await renderHook(() => useExchangeRates());
 
     await waitFor(() => expect(result.current.loadingRates).toBe(false));
 

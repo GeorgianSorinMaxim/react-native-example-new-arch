@@ -14,13 +14,13 @@ describe('SendScreen (TypeScript)', () => {
     jest.spyOn(Alert, 'alert').mockImplementation(() => {});
   });
 
-  it('renders loading state while rates are loading', () => {
+  it('renders loading state while rates are loading', async () => {
     (useExchangeRates as jest.Mock).mockReturnValue({
       rates: {},
       loadingRates: true,
     });
 
-    const { getByTestId } = render(<SendScreen />);
+    const { getByTestId } = await render(<SendScreen />);
     expect(getByTestId('ActivityIndicator')).toBeTruthy();
   });
 
@@ -30,9 +30,9 @@ describe('SendScreen (TypeScript)', () => {
       loadingRates: false,
     });
 
-    const { getByPlaceholderText, getByText } = render(<SendScreen />);
+    const { getByPlaceholderText, getByText } = await render(<SendScreen />);
 
-    fireEvent.changeText(getByPlaceholderText('0'), '10');
+    await fireEvent.changeText(getByPlaceholderText('0'), '10');
 
     await waitFor(() => {
       expect(getByText('1500.00 KES')).toBeTruthy();
@@ -45,8 +45,8 @@ describe('SendScreen (TypeScript)', () => {
       loadingRates: false,
     });
 
-    const { getByTestId } = render(<SendScreen />);
-    fireEvent.press(getByTestId('send-button'));
+    const { getByTestId } = await render(<SendScreen />);
+    await fireEvent.press(getByTestId('send-button'));
 
     expect(Alert.alert).toHaveBeenCalledWith(
       'Validation',
@@ -60,13 +60,13 @@ describe('SendScreen (TypeScript)', () => {
       loadingRates: false,
     });
 
-    const { getByPlaceholderText, getByTestId } = render(<SendScreen />);
+    const { getByPlaceholderText, getByTestId } = await render(<SendScreen />);
 
-    fireEvent.changeText(getByPlaceholderText('First name'), 'John');
-    fireEvent.changeText(getByPlaceholderText('Last name'), 'Doe');
-    fireEvent.changeText(getByPlaceholderText('e.g. 712345678'), '123');
+    await fireEvent.changeText(getByPlaceholderText('First name'), 'John');
+    await fireEvent.changeText(getByPlaceholderText('Last name'), 'Doe');
+    await fireEvent.changeText(getByPlaceholderText('e.g. 712345678'), '123');
 
-    fireEvent.press(getByTestId('send-button'));
+    await fireEvent.press(getByTestId('send-button'));
 
     expect(Alert.alert).toHaveBeenCalledWith(
       'Validation',
@@ -80,14 +80,14 @@ describe('SendScreen (TypeScript)', () => {
       loadingRates: false,
     });
 
-    const { getByPlaceholderText, getByTestId } = render(<SendScreen />);
+    const { getByPlaceholderText, getByTestId } = await render(<SendScreen />);
 
-    fireEvent.changeText(getByPlaceholderText('First name'), 'John');
-    fireEvent.changeText(getByPlaceholderText('Last name'), 'Doe');
-    fireEvent.changeText(getByPlaceholderText('e.g. 712345678'), '712345678');
-    fireEvent.changeText(getByPlaceholderText('0'), '');
+    await fireEvent.changeText(getByPlaceholderText('First name'), 'John');
+    await fireEvent.changeText(getByPlaceholderText('Last name'), 'Doe');
+    await fireEvent.changeText(getByPlaceholderText('e.g. 712345678'), '712345678');
+    await fireEvent.changeText(getByPlaceholderText('0'), '');
 
-    fireEvent.press(getByTestId('send-button'));
+    await fireEvent.press(getByTestId('send-button'));
 
     expect(Alert.alert).toHaveBeenCalledWith(
       'Validation',
@@ -103,14 +103,14 @@ describe('SendScreen (TypeScript)', () => {
       loadingRates: false,
     });
 
-    const { getByPlaceholderText, getByTestId } = render(<SendScreen />);
+    const { getByPlaceholderText, getByTestId } = await render(<SendScreen />);
 
-    fireEvent.changeText(getByPlaceholderText('First name'), 'John');
-    fireEvent.changeText(getByPlaceholderText('Last name'), 'Doe');
-    fireEvent.changeText(getByPlaceholderText('e.g. 712345678'), '712345678');
-    fireEvent.changeText(getByPlaceholderText('0'), '10');
+    await fireEvent.changeText(getByPlaceholderText('First name'), 'John');
+    await fireEvent.changeText(getByPlaceholderText('Last name'), 'Doe');
+    await fireEvent.changeText(getByPlaceholderText('e.g. 712345678'), '712345678');
+    await fireEvent.changeText(getByPlaceholderText('0'), '10');
 
-    fireEvent.press(getByTestId('send-button'));
+    await fireEvent.press(getByTestId('send-button'));
 
     jest.runAllTimers();
 

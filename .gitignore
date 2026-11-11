@@ -83,3 +83,6 @@ yarn-error.*
 *.tsbuildinfo
 
 # @end expo-cli
+# Generated native projects (Expo prebuild)
+/ios
+/android

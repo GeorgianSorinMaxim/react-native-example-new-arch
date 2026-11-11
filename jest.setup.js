@@ -1,6 +1,13 @@
-require('@testing-library/jest-native/extend-expect');
-
-jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
+jest.mock('react-native-reanimated', () => {
+  const { View } = require('react-native');
+  return {
+    __esModule: true,
+    default: { View },
+    useSharedValue: (value) => ({ value }),
+    useAnimatedStyle: (fn) => fn(),
+    withTiming: (value) => value,
+  };
+});
 jest.mock('expo-constants', () => ({ manifest: {} }));
 jest.mock('expo-linear-gradient', () => {
   const { View } = require('react-native');
