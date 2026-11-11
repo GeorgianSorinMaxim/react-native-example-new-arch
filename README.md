@@ -1,9 +1,9 @@
-# PenguinPay: React Native New Architecture example
+# React Native New Architecture example
 
 [![CI](https://github.com/GeorgianSorinMaxim/react-native-example-new-arch/actions/workflows/ci.yml/badge.svg)](https://github.com/GeorgianSorinMaxim/react-native-example-new-arch/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-PenguinPay is a small money-transfer app. It sends USD to Kenya, Nigeria, Tanzania and Uganda. It shows a React Native app that runs on the New Architecture (Fabric and TurboModules), with Expo Router, the React Compiler, Reanimated, strict TypeScript, and unit tests with React Native Testing Library. Live exchange rates come from Open Exchange Rates.
+This is a React Native app that runs on the New Architecture (Fabric and TurboModules), with Expo Router, the React Compiler, Reanimated, strict TypeScript, and unit tests with React Native Testing Library. It is a small money-transfer app example that uses exchange rates from Open Exchange Rates.
 
 <p align="center">
   <img src="docs/screenshot.png" alt="PenguinPay send screen" width="300" />
